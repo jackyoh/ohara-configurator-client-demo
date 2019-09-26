@@ -35,11 +35,10 @@ class TestConfiguratorClient {
         nodeApi.request.hostname(node.hostname).port(node._port).user(node._user).password(node._password).create())
     }
 
-    //Create zookeeper cluster
     val zkApi = ZookeeperApi.access.hostname(configurator.hostname).port(configurator.port)
-
-    //Start zookeeper cluster
     val zkClusterName: String = "zk"
+
+    //Create and start zookeeper cluster
     result(zkApi.request
       .name(zkClusterName)
       .clientPort(CommonUtils.availablePort)
@@ -51,9 +50,9 @@ class TestConfiguratorClient {
 
 
     val bkApi = BrokerApi.access.hostname(configurator.hostname).port(configurator.port)
-
-    //Create broker cluster
     val bkClusterName: String = "bk"
+
+    //Create and start broker cluster
     result(bkApi.request
       .name(bkClusterName)
       .clientPort(CommonUtils.availablePort)
@@ -63,13 +62,12 @@ class TestConfiguratorClient {
       .nodeNames(Set(nodes.head.hostname))
       .create())
 
-    //Start broker cluster
     result(bkApi.start(bkClusterName))
 
     val wkApi = WorkerApi.access.hostname(configurator.hostname).port(configurator.port)
     val wkClusterName = "wk"
 
-    //Create worker cluster
+    //Create worker and start worker cluster
     result(wkApi.request
       .name(wkClusterName)
       .clientPort(CommonUtils.availablePort)
@@ -78,7 +76,6 @@ class TestConfiguratorClient {
       .nodeNames(Set(nodes.head.hostname))
       .create())
 
-    //Start worker cluster
     result(wkApi.start(wkClusterName))
   }
 
