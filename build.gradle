@@ -1,0 +1,28 @@
+apply plugin: 'scala'
+
+sourceCompatibility = 1.8
+
+repositories {
+  mavenCentral()
+  maven {
+    url "https://dl.bintray.com/oharastream/ohara"
+  }
+}
+
+tasks.withType(JavaCompile){
+  options.encoding = 'UTF-8'
+}
+
+tasks.withType(Javadoc){
+  options.encoding = 'UTF-8'
+}
+
+dependencies {
+  compile 'org.scala-lang:scala-library:2.12.9'
+  compile 'com.typesafe.akka:akka-http_2.12:10.1.3'
+  compile 'junit:junit:4.12'
+  compile 'com.typesafe.akka:akka-http-spray-json_2.12:10.1.3'
+  compile 'com.island.ohara:ohara-configurator:0.7.1'
+  compile 'com.island.ohara:ohara-client:0.7.1'
+  compile 'com.island.ohara:ohara-common:0.7.1'
+}
